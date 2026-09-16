@@ -4,17 +4,17 @@ plugins {
 }
 
 android {
-    namespace = "com.example.unibustracker"
+    namespace = "com.unibus.bd"
     compileSdk {
-        version = release(37)
+        version = release(35)
     }
 
     defaultConfig {
-        applicationId = "com.example.unibustracker"
-        minSdk = 24
-        targetSdk = 37
+        applicationId = "com.unibus.bd"
+        minSdk = 26
+        targetSdk = 35
         versionCode = 1
-        versionName = "1.0"
+        versionName = "1.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
