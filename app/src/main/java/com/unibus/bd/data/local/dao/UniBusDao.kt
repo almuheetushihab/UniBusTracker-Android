@@ -13,28 +13,28 @@ import kotlinx.coroutines.flow.Flow
  * Data Access Object (DAO) for UniBus local database operations.
  */
 @Dao
-interface UniBusDao {
+abstract class UniBusDao {
 
     @Query("SELECT * FROM routes")
-    fun getAllRoutes(): Flow<List<RouteEntity>>
+    abstract fun getAllRoutes(): Flow<List<RouteEntity>>
 
     @Query("SELECT * FROM stoppages WHERE routeId = :routeId ORDER BY sequenceOrder ASC")
-    fun getRouteWithStoppages(routeId: String): Flow<List<StoppageEntity>>
+    abstract fun getRouteWithStoppages(routeId: String): Flow<List<StoppageEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertRoutes(routes: List<RouteEntity>)
+    abstract suspend fun insertRoutes(routes: List<RouteEntity>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertStoppages(stoppages: List<StoppageEntity>)
+    abstract suspend fun insertStoppages(stoppages: List<StoppageEntity>)
 
     @Query("DELETE FROM stoppages")
-    suspend fun clearStoppages()
+    abstract suspend fun clearStoppages()
 
     @Query("DELETE FROM routes")
-    suspend fun clearRoutes()
+    abstract suspend fun clearRoutes()
 
     @Transaction
-    suspend fun clearCache() {
+    open suspend fun clearCache() {
         clearStoppages()
         clearRoutes()
     }
